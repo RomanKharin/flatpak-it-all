@@ -6,9 +6,9 @@
     
 ## Install via test repository
 
-    flatpak --user remote-add --no-gpg-verify --if-not-exists test-flatpak test-repo
+    flatpak --user remote-add --no-gpg-verify --if-not-exists test-flatpak-python test-repo
     
-    flatpak --user install test-flatpak test.flatpak.python3_6
+    flatpak --user install test-flatpak-python test.flatpak.python3_6
     
 ## Run
 
