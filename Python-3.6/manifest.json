@@ -1,0 +1,65 @@
+{
+    "id": "test.flatpak.python3_6",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "3.6.0",
+    "branch": "stable",
+    "command": "python3.6",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--share=ipc",
+        "--share=network",
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--filesystem=home"
+    ],
+    "modules": [
+        {
+            "name": "tcl8.6",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://prdownloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz",
+                    "sha256": "a265409781e4b3edcc4ef822533071b34c3dc6790b893963809b9fe221befe07"
+                }
+            ],
+            "subdir": "unix",
+            "post-install": [
+                "chmod +w /app/lib/libtcl8.6.so"
+            ]
+        },
+        {
+            "name": "tk8.6",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://prdownloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz",
+                    "sha256": "d62c371a71b4744ed830e3c21d27968c31dba74dd2c45f36b9b071e6d88eb19d"
+                }
+            ],
+            "subdir": "unix",
+            "post-install": [
+                "chmod +w /app/lib/libtk8.6.so"
+            ]
+        },
+        {
+            "name": "python3.6.0",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz",
+                    "sha256": "b0c5f904f685e32d9232f7bdcbece9819a892929063b6e385414ad2dd6a23622"
+                }
+            ],
+            "config-opts": ["--enable-shared"],
+            "post-install": [
+                "chmod +w /app/lib/libpython3.6m.so.1.0",
+                "chmod +w /app/lib/libpython3.so"
+            ]
+        }
+    ]
+}
