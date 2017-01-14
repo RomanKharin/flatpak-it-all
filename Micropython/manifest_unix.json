@@ -1,0 +1,39 @@
+{
+    "id": "test.flatpak.micropython_unix",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "1.8.7",
+    "branch": "stable",
+    "command": "micropython",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--share=ipc",
+        "--share=network",
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--filesystem=home"
+    ],
+    "modules": [
+        {
+            "name": "micropython1.8.7",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/micropython/micropython.git",
+                    "branch": "v1.8.7"
+                },
+                {
+                    "type": "file",
+                    "path": "configure",
+                    "dest-filename": "unix/configure"
+                }
+            ],
+            "make-install-args": ["PREFIX=/app"],
+            "subdir": "unix"
+        }
+    ]
+}
