@@ -30,12 +30,18 @@ def main(stracelog, builddir, usejson = False):
                 p = line.find("]", 5) # len("[pid ") == 5
                 if p >= 0:
                     line = line[p + 1:].lstrip()
+            dline = ""
             if line.startswith("open("):
-                p = line.find("\"", 6)
+                dline = line[5:]
+            elif line.startswith("execve("):
+                dline = line[7:]
+            if dline:
+                p = dline.find("\"", 1)
                 if p >= 0:
-                    path = line[6:p]
+                    path = dline[1:p]
                     if not path.startswith("/app"): continue
                     usedfiles.add(path)
+                    print(path)
                     # detect symbolic links
                     full = path[4:]
                     if full.startswith("/"):
@@ -44,9 +50,10 @@ def main(stracelog, builddir, usejson = False):
                     if os.path.exists(full):
                         link = pathlib.Path(full)
                         if link.is_symlink():
-                            rel = os.path.relpath(link, os.dirname(full))
-                            dst = os.path.join(os.dirname(path, rel))
-                            usedfiles.add(dst)
+                            rel = os.path.relpath(str(link.resolve()), os.path.dirname(full))
+                            dst = os.path.join(os.path.dirname(path), rel)
+                            if dst.startswith("/app"):
+                                usedfiles.add(dst)
 
     unusedfiles = []
     unuseddirs = []
@@ -104,7 +111,7 @@ def main(stracelog, builddir, usejson = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("stracelog", help = \
-        "strace log file (strace -f -e open, process ...)")
+        "strace log file (strace -f -e open,process ...)")
     parser.add_argument("builddir", help = \
         "path to files directory (/app root)")
     parser.add_argument("--json", help = \
