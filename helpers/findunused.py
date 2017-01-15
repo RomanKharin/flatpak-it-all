@@ -60,7 +60,8 @@ def main(stracelog, builddir, usejson = False):
         if not approot.startswith("/"):
             approot = "/" + approot
         # /app prefix is not required for cleanup option
-        #approot = "/app" + approot
+        cleanroot = approot
+        approot = "/app" + approot
         cntud = 0
         unuseditems = []
         for dname in dirs:
@@ -86,7 +87,7 @@ def main(stracelog, builddir, usejson = False):
         else:
             # append all unused
             for item in unuseditems:
-                unusedfiles.append(os.path.join(approot, item))
+                unusedfiles.append(os.path.join(cleanroot, item))
 
     unusedfiles.sort()
     if usejson:
