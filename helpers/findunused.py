@@ -41,7 +41,6 @@ def main(stracelog, builddir, usejson = False):
                     path = dline[1:p]
                     if not path.startswith("/app"): continue
                     usedfiles.add(path)
-                    print(path)
                     # detect symbolic links
                     full = path[4:]
                     if full.startswith("/"):
