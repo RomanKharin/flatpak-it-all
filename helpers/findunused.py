@@ -4,7 +4,7 @@
 # Find unused files and directories
 # romiq.kh@gmail.com, 2017
 #
-# strace -e open,process flatpak-builder --run builddir app 2& > strace.log
+# strace -f -e open,process flatpak run some.test.app 2& > strace.log
 # findunused.py strace.log builddir/files/
 
 import sys
@@ -59,7 +59,8 @@ def main(stracelog, builddir, usejson = False):
         approot = root[len(builddir):]
         if not approot.startswith("/"):
             approot = "/" + approot
-        approot = "/app" + approot
+        # /app prefix is not required for cleanup option
+        #approot = "/app" + approot
         cntud = 0
         unuseditems = []
         for dname in dirs:
@@ -102,7 +103,7 @@ def main(stracelog, builddir, usejson = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("stracelog", help = \
-        "strace log file (strace -e open, process ...)")
+        "strace log file (strace -f -e open, process ...)")
     parser.add_argument("builddir", help = \
         "path to files directory (/app root)")
     parser.add_argument("--json", help = \
