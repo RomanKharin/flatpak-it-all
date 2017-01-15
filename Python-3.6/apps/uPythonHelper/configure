@@ -1,0 +1,14 @@
+#!/bin/sh
+cat <<EOF >Makefile
+DEST = /app/uPythonHelper
+all:
+	echo
+install:
+	mkdir -p \$(DEST)
+	cp main.py /app/bin/upythonhelper.py
+	chmod 0577 /app/bin/upythonhelper.py
+	cp *.md \$(DEST)/
+	cp *.txt \$(DEST)/
+	cp *.png \$(DEST)/
+EOF
+
