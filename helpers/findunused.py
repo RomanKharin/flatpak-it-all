@@ -20,9 +20,12 @@ def sizeof_fmt(num, suffix = "B"):
         num /= 1024.0
     return "%.1f%s%s" % (num, "Yi", suffix)
 
-def main(stracelog, builddir, usejson = False):
+def main(stracelog, builddir, usejson = False, verbose = False):
     # parse log
     usedfiles = set()
+    if verbose and not usejson:
+        print("Parse file strace log:\t%s" % stracelog)
+    usedlinks = set()
     with open(stracelog, "r") as f:
         for line in f.readlines():
             line = line.rstrip()
@@ -49,10 +52,16 @@ def main(stracelog, builddir, usejson = False):
                     if os.path.exists(full):
                         link = pathlib.Path(full)
                         if link.is_symlink():
-                            rel = os.path.relpath(str(link.resolve()), os.path.dirname(full))
+                            usedlinks.add(path)
+                            rel = os.path.relpath(
+                                str(link.resolve()), os.path.dirname(full))
                             dst = os.path.join(os.path.dirname(path), rel)
+                            if verbose and not usejson:
+                                print("  link %s -> %s" % (path, dst))
                             if dst.startswith("/app"):
                                 usedfiles.add(dst)
+    if verbose and not usejson:
+        print("  found:\t\t%d items" % len(usedfiles))
 
     unusedfiles = []
     unuseddirs = []
@@ -68,32 +77,66 @@ def main(stracelog, builddir, usejson = False):
         # /app prefix is not required for cleanup option
         cleanroot = approot
         approot = "/app" + approot
+        if verbose and not usejson:
+            print("Scan folder %s" % approot)
         cntud = 0
         unuseditems = []
+        dusedd = []
         for dname in dirs:
             if os.path.join(approot, dname) in unuseddirs:
                 cntud += 1
                 unuseditems.append(dname + "/")
+            else:
+                dusedd.append(dname)
         cntu = 0
+        dszused = 0
+        dszunused = 0
+        dused = []
         for fname in files:
             appfname = os.path.join(approot,fname)
             full = os.path.join(root, fname)
             sz = os.path.getsize(full)
+            # do not count links
+            link = pathlib.Path(full)
+            if link.is_symlink():
+                sz = 0
             if not appfname in usedfiles:
                 # add to unused
                 szunused += sz
+                dszunused += sz
                 cntunused += 1
                 cntu += 1
                 unuseditems.append(fname)
             else:
                 szused += sz
+                dszused += sz
                 cntused += 1
+                dused.append((fname, sz))
+        if verbose and not usejson:
+            print("  folders:\t%d" % len(dirs))
+            print("  files:\t%d, %s" % (len(files),
+                sizeof_fmt(dszused + dszunused)))
+            if dusedd:
+                print("  used folders:\t%d" % len(dusedd))
+                for item in dusedd:
+                    print("    %s" % item)
+            if dused:
+                print("  used files:\t%d, %s" % (len(dused),
+                    sizeof_fmt(dszused)))
+                for item, sz in dused:
+                    print("    %s, %s" % (item, sizeof_fmt(sz)))
+
         if len(files) == cntu and len(dirs) == cntud:
             unuseddirs.append(approot)
+            print("  all unused")
         else:
             # append all unused
+            if verbose and not usejson:
+                print("  unused items: (%d)" % len(unuseditems))
             for item in unuseditems:
                 unusedfiles.append(os.path.join(cleanroot, item))
+                if verbose and not usejson:
+                    print("    %s" % item)
 
     unusedfiles.sort()
     if usejson:
@@ -116,8 +159,11 @@ if __name__ == "__main__":
     parser.add_argument("--json", help = \
         "output unused files and directories in JSON format",
         action = "store_true")
+    parser.add_argument("-v", "--verbose", help = \
+        "verbose outout",
+        action = "store_true")
     args = parser.parse_args()
 
     main(stracelog = args.stracelog, builddir = args.builddir, 
-        usejson = args.json)
+        usejson = args.json, verbose = args.verbose)
 
