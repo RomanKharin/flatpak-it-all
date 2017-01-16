@@ -146,7 +146,8 @@ def main(stracelog, builddir, usejson = False, verbose = False,
 
         if len(files) == cntu and len(dirs) == cntud:
             unuseddirs.append(approot)
-            print("  all unused")
+            if verbose and not usejson:
+                print("  all unused")
         else:
             # append all unused
             if verbose and not usejson:
