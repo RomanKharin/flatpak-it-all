@@ -82,12 +82,12 @@ def main(stracelog, builddir, usejson = False):
             if not appfname in usedfiles:
                 # add to unused
                 szunused += sz
-                cntused += 1
+                cntunused += 1
                 cntu += 1
                 unuseditems.append(fname)
             else:
                 szused += sz
-                cntunused += 1
+                cntused += 1
         if len(files) == cntu and len(dirs) == cntud:
             unuseddirs.append(approot)
         else:
