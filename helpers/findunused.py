@@ -20,12 +20,17 @@ def sizeof_fmt(num, suffix = "B"):
         num /= 1024.0
     return "%.1f%s%s" % (num, "Yi", suffix)
 
-def main(stracelog, builddir, usejson = False, verbose = False):
+def main(stracelog, builddir, usejson = False, verbose = False, 
+        python_specific = []):
     # parse log
     usedfiles = set()
     if verbose and not usejson:
         print("Parse file strace log:\t%s" % stracelog)
     usedlinks = set()
+    def adduseditem(item):
+        if not path.startswith("/app"): return
+        usedfiles.add(item)
+        
     with open(stracelog, "r") as f:
         for line in f.readlines():
             line = line.rstrip()
@@ -42,8 +47,7 @@ def main(stracelog, builddir, usejson = False, verbose = False):
                 p = dline.find("\"", 1)
                 if p >= 0:
                     path = dline[1:p]
-                    if not path.startswith("/app"): continue
-                    usedfiles.add(path)
+                    adduseditem(path)
                     # detect symbolic links
                     full = path[4:]
                     if full.startswith("/"):
@@ -58,8 +62,22 @@ def main(stracelog, builddir, usejson = False, verbose = False):
                             dst = os.path.join(os.path.dirname(path), rel)
                             if verbose and not usejson:
                                 print("  link %s -> %s" % (path, dst))
-                            if dst.startswith("/app"):
-                                usedfiles.add(dst)
+                            adduseditem(dst)
+                    # python_specific
+                    if path.endswith(".pyc") and python_specific:
+                        if verbose and not usejson:
+                            print("  cache %s" % (path))
+                        for ps in python_specific:
+                            if path.endswith("." + ps + ".pyc"):
+                                # find module name
+                                p2 = path.split("/")
+                                if len(p2) >= 2 and p2[-2] == "__pycache__":
+                                    modname = p2[-1][:-len(ps) - 5] + ".py"
+                                    modpath = "/".join(p2[:-2] + [modname])
+                                    if verbose and not usejson:
+                                        print("  -> file %s" % (modpath))
+                                    adduseditem(modpath)                                
+                        
     if verbose and not usejson:
         print("  found:\t\t%d items" % len(usedfiles))
 
@@ -162,8 +180,12 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--verbose", help = \
         "verbose outout",
         action = "store_true")
+    parser.add_argument("-pc", "--python-specific", action = "append",
+        help = "detect __pycache__/module.PYTHON_SPECIFIC.pyc"\
+        " using as module.py")
     args = parser.parse_args()
 
     main(stracelog = args.stracelog, builddir = args.builddir, 
-        usejson = args.json, verbose = args.verbose)
+        usejson = args.json, verbose = args.verbose, 
+        python_specific = args.python_specific)
 
