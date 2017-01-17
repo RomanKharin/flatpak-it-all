@@ -6,6 +6,14 @@
 #
 # strace -f -e open,process flatpak run some.test.app 2& > strace.log
 # findunused.py strace.log builddir/files/
+# beware deleting locale files
+# note bug: cross links to subfolder are not detected
+#  $(installed_apps)/current -> $(installed_apps)/$(arch)
+#  $(installed_apps)/current/active -> $(installed_apps)/current/$(commit)
+#  $(installed_apps)/current/active/bin/link -> 
+#      $(installed_apps)/current/active/bin/file
+# so $(installed_apps)/current/active/bin/file can be resolved to
+# $(installed_apps)/$(arch)/$(commit)/bin/file and detected as unused
 
 import sys
 import os
@@ -103,7 +111,7 @@ def main(stracelog, builddir, usejson = False, verbose = False,
         for dname in dirs:
             if os.path.join(approot, dname) in unuseddirs:
                 cntud += 1
-                unuseditems.append(dname + "/")
+                unuseditems.append(dname + "/*")
             else:
                 dusedd.append(dname)
         cntu = 0
