@@ -1,0 +1,16 @@
+{
+    "name": "serial_device2_1.8.3",
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://files.pythonhosted.org/packages/32/cb/f563242cd582224210fb4005d0ebde5bc9edd2fbb24f47e02d947d20f08b/serial_device2-1.8.3.tar.gz",
+            "sha256": "716c2fd41ae6d79c7fa708a10bf098ef81f57b1622cd2f4b13b687efa5478b7f"
+        },
+        {
+            "type": "file",
+            "path": "configure_bulk",
+            "dest-filename": "configure"
+        }
+    ]        
+}
+

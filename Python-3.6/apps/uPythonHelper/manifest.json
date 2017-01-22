@@ -20,94 +20,12 @@
         "--filesystem=/dev/ttyACM0"
     ],
     "modules": [
-        {
-            "name": "tcl8.6",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://prdownloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz",
-                    "sha256": "a265409781e4b3edcc4ef822533071b34c3dc6790b893963809b9fe221befe07"
-                }
-            ],
-            "subdir": "unix",
-            "post-install": [
-                "chmod +w /app/lib/libtcl8.6.so"
-            ]
-        },
-        {
-            "name": "tk8.6",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://prdownloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz",
-                    "sha256": "d62c371a71b4744ed830e3c21d27968c31dba74dd2c45f36b9b071e6d88eb19d"
-                }
-            ],
-            "subdir": "unix",
-            "post-install": [
-                "chmod +w /app/lib/libtk8.6.so"
-            ]
-        },
-        {
-            "name": "python3.6.0",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz",
-                    "sha256": "b0c5f904f685e32d9232f7bdcbece9819a892929063b6e385414ad2dd6a23622"
-                }
-            ],
-            "config-opts": ["--enable-shared"],
-            "post-install": [
-                "chmod +w /app/lib/libpython3.6m.so.1.0",
-                "chmod +w /app/lib/libpython3.so"
-            ]
-        },
-        {
-            "name": "pyserial3.2.1",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/pyserial/pyserial.git",
-                    "branch": "v3.2.1"
-                },
-                {
-                    "type": "file",
-                    "path": "configure_bulk",
-                    "dest-filename": "configure"
-                }
-            ]
-        },
-        {
-            "name": "serial_device2_1.8.3",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://files.pythonhosted.org/packages/32/cb/f563242cd582224210fb4005d0ebde5bc9edd2fbb24f47e02d947d20f08b/serial_device2-1.8.3.tar.gz",
-                    "sha256": "716c2fd41ae6d79c7fa708a10bf098ef81f57b1622cd2f4b13b687efa5478b7f"
-                },
-                {
-                    "type": "file",
-                    "path": "configure_bulk",
-                    "dest-filename": "configure"
-                }
-            ]        
-        },
-        {
-            "name": "uPythonHelper",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/casten/uPythonHelper.git",
-                    "branch": "master"
-                },
-                {
-                    "type": "file",
-                    "path": "configure",
-                    "dest-filename": "configure"
-                }
-            ]
-        }
+        "../../../libs/tcl_tk/tcl_8.6.6.json",
+        "../../../libs/tcl_tk/tk_8.6.6.json",
+        "../../python_3.6.0.json",
+        "pyserial_3.2.1.json",
+        "serial_device2_1.8.3.json",
+        "upythonhelper_master.json"
     ],
     "cleanup-commands": [
     ],

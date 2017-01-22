@@ -1,0 +1,16 @@
+{
+    "name": "uPythonHelper",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/casten/uPythonHelper.git",
+            "branch": "master"
+        },
+        {
+            "type": "file",
+            "path": "configure",
+            "dest-filename": "configure"
+        }
+    ]
+}
+

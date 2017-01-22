@@ -1,0 +1,16 @@
+{
+    "name": "pyserial3.2.1",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/pyserial/pyserial.git",
+            "branch": "v3.2.1"
+        },
+        {
+            "type": "file",
+            "path": "configure_bulk",
+            "dest-filename": "configure"
+        }
+    ]
+}
+
