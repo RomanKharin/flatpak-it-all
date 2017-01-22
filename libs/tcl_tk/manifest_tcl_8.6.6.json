@@ -1,0 +1,18 @@
+{
+    "id": "test.flatpak.tcl",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "8.6.6",
+    "branch": "stable",
+    "command": "tclsh8.6",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--filesystem=home"
+    ],
+    "modules": [
+        "tcl_8.6.6.json"
+    ]
+}

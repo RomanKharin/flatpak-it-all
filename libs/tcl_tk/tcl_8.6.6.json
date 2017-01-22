@@ -1,0 +1,15 @@
+{
+    "name": "tcl8.6.8",
+    "sources": [
+        {
+            "type": "archive",
+            "url": "http://prdownloads.sourceforge.net/tcl/tcl8.6.6-src.tar.gz",
+            "sha256": "a265409781e4b3edcc4ef822533071b34c3dc6790b893963809b9fe221befe07"
+        }
+    ],
+    "subdir": "unix",
+    "post-install": [
+        "chmod +w /app/lib/libtcl8.6.so"
+    ]
+}
+
