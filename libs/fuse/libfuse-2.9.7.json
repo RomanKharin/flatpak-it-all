@@ -1,0 +1,18 @@
+{
+    "name": "libfuse2.9.7",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/libfuse/libfuse.git",
+            "branch": "fuse-2.9.7"
+        },
+        {
+            "type": "shell",
+            "commands": ["./makeconf.sh"]
+        }
+    ],
+    "build-options": {
+        "env": {"MOUNT_FUSE_PATH": "/app/sbin"}
+    }
+}
+
