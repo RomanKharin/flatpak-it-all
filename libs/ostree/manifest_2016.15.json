@@ -1,0 +1,19 @@
+{
+    "id": "test.flatpak.ostree",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "2016.15",
+    "branch": "stable",
+    "command": "ostree",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--filesystem=home"
+    ],
+    "modules": [
+        "../fuse/libfuse-2.9.7.json",
+        "ostree_2016.15.json"
+    ]
+}

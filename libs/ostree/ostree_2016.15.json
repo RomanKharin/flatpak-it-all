@@ -1,0 +1,13 @@
+{
+    "name": "ostree2016.15",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/ostreedev/ostree.git",
+            "branch": "v2016.15"
+        }
+    ],
+    "build-options": {
+    }
+}
+
