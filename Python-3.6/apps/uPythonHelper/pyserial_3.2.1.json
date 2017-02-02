@@ -7,10 +7,12 @@
             "branch": "v3.2.1"
         },
         {
-            "type": "file",
-            "path": "configure_bulk",
-            "dest-filename": "configure"
+            "type": "script",
+            "commands": [
+                "cat <<EOF >configure\nEOF",
+                "chmod +x configure",
+                "cat <<EOF >Makefile\nall:\n\tpip3 install .\ninstall:\n\techo installed\nEOF"
+            ]
         }
     ]
 }
-

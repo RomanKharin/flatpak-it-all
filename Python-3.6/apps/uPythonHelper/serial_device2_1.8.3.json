@@ -7,9 +7,12 @@
             "sha256": "716c2fd41ae6d79c7fa708a10bf098ef81f57b1622cd2f4b13b687efa5478b7f"
         },
         {
-            "type": "file",
-            "path": "configure_bulk",
-            "dest-filename": "configure"
+            "type": "script",
+            "commands": [
+                "cat <<EOF >configure\nEOF",
+                "chmod +x configure",
+                "cat <<EOF >Makefile\nall:\n\tpip3 install .\ninstall:\n\techo installed\nEOF"
+            ]
         }
     ]        
 }

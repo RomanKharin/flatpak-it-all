@@ -7,9 +7,12 @@
             "branch": "master"
         },
         {
-            "type": "file",
-            "path": "configure",
-            "dest-filename": "configure"
+            "type": "script",
+            "commands": [
+                "cat <<EOF >configure\nEOF",
+                "chmod +x configure",
+                "cat <<EOF >Makefile\nDEST = /app/uPythonHelper\nall:\n\techo\ninstall:\n\tmkdir -p \\$(DEST)\n\tcp main.py /app/bin/upythonhelper.py\n\tchmod 0577 /app/bin/upythonhelper.py\n\tcp *.md \\$(DEST)/\n\tcp *.txt \\$(DEST)/\n\tcp *.png \\$(DEST)/\nEOF"
+            ]
         }
     ]
 }
