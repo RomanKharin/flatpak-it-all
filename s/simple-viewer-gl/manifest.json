@@ -1,0 +1,25 @@
+{
+    "id": "test.flatpak.simple_viewer_gl_2_82",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "2.82",
+    "branch": "stable",
+    "command": "sviewgl",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--share=ipc",
+        "--share=network",
+        "--socket=x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--socket=pulseaudio",
+        "--filesystem=home"
+    ],
+    "modules": [
+        "glfw_3.2.1.json",
+        "simple-viewer-gl_2.82.json"
+    ]
+}

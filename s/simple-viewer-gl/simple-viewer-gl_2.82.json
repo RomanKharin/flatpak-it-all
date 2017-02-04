@@ -1,0 +1,24 @@
+{
+    "name": "simple-viewer-gl_2.82",
+    "sources": [
+        {
+            "type": "git",
+            "branch": "v2.82",
+            "url": "https://bitbucket.org/andreyu/simple-viewer-gl.git"
+        },
+        {
+            "type": "shell",
+            "commands": [
+            "echo `pwd` > hello",
+            "cp CMakeLists.txt ~/CMakeLists.txt_old",
+            "sed -i 's/\\${GLFW_LIBRARIES}/\\${GLFW_LIBRARIES} \\${X11_LIBRARIES} Xinerama/g' CMakeLists.txt",
+            "echo 'install(PROGRAMS \"sviewgl\" DESTINATION \"/app/bin/\")' >> CMakeLists.txt"
+            ]
+        }
+    ],
+    "buildsystem": "cmake",
+    "cmake": true,
+    "config-opts": [],
+    "post-install": [
+    ]
+}

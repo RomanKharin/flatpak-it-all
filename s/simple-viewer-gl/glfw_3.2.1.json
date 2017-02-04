@@ -1,0 +1,15 @@
+{
+    "name": "glfw_3.2.1",
+    "sources": [
+        {
+            "type": "git",
+            "branch": "3.2.1",
+            "url": "https://github.com/glfw/glfw.git"
+        }
+    ],
+    "buildsystem": "cmake",
+    "cmake": true,
+    "config-opts": [],
+    "post-install": [
+    ]
+}
