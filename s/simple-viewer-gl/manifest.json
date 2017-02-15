@@ -1,9 +1,9 @@
 {
-    "id": "test.flatpak.simple_viewer_gl_2_82",
+    "id": "test.flatpak.simple_viewer_gl",
     "runtime": "org.freedesktop.Platform",
     "runtime-version": "1.4",
     "sdk": "org.freedesktop.Sdk",
-    "version": "2.82",
+    "version": "2.87",
     "branch": "stable",
     "command": "sviewgl",
     "build-runtime": false,
@@ -20,6 +20,6 @@
     ],
     "modules": [
         "glfw_3.2.1.json",
-        "simple-viewer-gl_2.82.json"
+        "simple-viewer-gl_2.87.json"
     ]
 }

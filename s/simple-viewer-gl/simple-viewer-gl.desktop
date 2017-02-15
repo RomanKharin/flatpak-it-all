@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Simple Viewer GL
+Comment=Simple and tiny image viewer based on OpenGL.
+Exec=sviewgl %U
+Terminal=false
+Type=Application
+StartupNotify=true
+MimeType=image/png;image/jpeg;image/gif;
+Categories=Graphics;

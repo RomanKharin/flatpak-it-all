@@ -8,11 +8,11 @@
 
     flatpak --user remote-add --no-gpg-verify --if-not-exists test-flatpak-sviewgl test-repo
     
-    flatpak --user install test-flatpak-sviewgl test.flatpak.simple_viewer_gl_2_82
+    flatpak --user install test-flatpak-sviewgl test.flatpak.simple_viewer_gl
     
 ## Run
 
-    flatpak run test.flatpak.simple_viewer_gl_2_82
+    flatpak run test.flatpak.simple_viewer_gl
     
 ## Notes:
 

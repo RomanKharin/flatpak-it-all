@@ -1,0 +1,28 @@
+{
+    "name": "simple-viewer-gl_2.87",
+    "sources": [
+        {
+            "type": "git",
+            "branch": "v2.87",
+            "url": "https://bitbucket.org/andreyu/simple-viewer-gl.git"
+        },
+        {
+            "type": "file",
+            "path": "simple-viewer-gl.desktop"
+        },
+        {
+            "type": "shell",
+            "commands": [
+            "sed -i 's/\\${GLFW_LIBRARIES}/\\${GLFW_LIBRARIES} Xinerama/g' CMakeLists.txt",
+            "echo 'install(PROGRAMS \"sviewgl\" DESTINATION \"/app/bin/\")' >> CMakeLists.txt",
+            "mkdir -p /app/share/applications/",
+            "cp simple-viewer-gl.desktop /app/share/applications/test.flatpak.simple_viewer_gl.desktop"
+            ]
+        }
+    ],
+    "buildsystem": "cmake",
+    "cmake": true,
+    "config-opts": [],
+    "post-install": [
+    ]
+}
