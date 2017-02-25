@@ -18,8 +18,8 @@
         "--filesystem=home"
     ],
     "modules": [
-        "../libs/tcl_tk/tcl_8.6.6.json",
-        "../libs/tcl_tk/tk_8.6.6.json",
+        "../../t/tcl_tk/tcl_8.6.6.json",
+        "../../t/tcl_tk/tk_8.6.6.json",
         "python_3.6.0.json"
     ]
 }

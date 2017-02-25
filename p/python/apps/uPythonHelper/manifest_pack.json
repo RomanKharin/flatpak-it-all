@@ -20,8 +20,8 @@
         "--filesystem=/dev/ttyACM0"
     ],
     "modules": [
-        "../../../libs/tcl_tk/tcl_8.6.6.json",
-        "../../../libs/tcl_tk/tk_8.6.6.json",
+        "../../../../t/tcl_tk/tcl_8.6.6.json",
+        "../../../../t/tcl_tk/tk_8.6.6.json",
         "../../python_3.6.0.json",
         "pyserial_3.2.1.json",
         "serial_device2_1.8.3.json",

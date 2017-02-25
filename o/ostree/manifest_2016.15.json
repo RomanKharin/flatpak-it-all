@@ -13,7 +13,7 @@
         "--filesystem=home"
     ],
     "modules": [
-        "../fuse/libfuse-2.9.7.json",
+        "../../f/fuse/libfuse-2.9.7.json",
         "ostree_2016.15.json"
     ]
 }
