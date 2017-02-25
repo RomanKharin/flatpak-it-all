@@ -1,0 +1,19 @@
+{
+    "id": "test.flatpak.tesseract",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "master",
+    "branch": "stable",
+    "command": "tesseract",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--filesystem=home"
+    ],
+    "modules": [
+        "../../l/leptonica/leptonica-1.74.json",
+        "tesseract.json"
+    ]
+}

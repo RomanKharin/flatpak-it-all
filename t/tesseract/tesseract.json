@@ -1,0 +1,12 @@
+{
+    "name": "tesseract",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/tesseract-ocr/tesseract.git"
+        }
+    ],
+    "build-options": {
+    }
+}
+
