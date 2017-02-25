@@ -1,0 +1,18 @@
+{
+    "id": "test.flatpak.leptonica",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.4",
+    "sdk": "org.freedesktop.Sdk",
+    "version": "1.74.1",
+    "branch": "stable",
+    "command": "convertformat",
+    "build-runtime": false,
+    "build-options" : {
+    },
+    "finish-args" : [
+        "--filesystem=home"
+    ],
+    "modules": [
+        "leptonica-1.74.json"
+    ]
+}

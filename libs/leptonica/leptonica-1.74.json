@@ -1,0 +1,19 @@
+{
+    "name": "leptonica1.74",
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/DanBloomberg/leptonica.git",
+            "branch": "1.74.1"
+        },
+        {
+            "type": "shell",
+             "commands": [
+                "./autobuild"
+             ]
+        }
+    ],
+    "build-options": {
+    }
+}
+
